@@ -1,0 +1,21 @@
+.hey {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 500px;
+    background-color: grey;
+    align-items: center;
+}
+
+.subhey {
+	height: 50px;
+	width: 100px;
+	margin: 20px;
+	background-color: green;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
