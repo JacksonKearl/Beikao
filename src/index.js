@@ -33,7 +33,7 @@ class Body extends Component {
 	constructor(){
 		super();
 		this.data = [
-			{title: 'update git', tags: 'git amend', description: 'hello hello he444llo'},
+			{title: 'update git', tags: 'git amend', description: 'hello hello he444llogit rebase -i HEAD~3 # Displays a list of the last 3 commits on the current branchgit rebase -i HEAD~3 # Displays a list of the last 3 commits on the current branchgit rebase -i HEAD~3 # Displays a list of the last 3 commits on the current branchgit rebase -i HEAD~3 # Displays a list of the last 3 commits on the current branchgit rebase -i HEAD~3 # Displays a list of the last 3 commits on the current branchgit rebase -i HEAD~3 # Displays a list of the last 3 commits on the current branch'},
 			{title: 'update git1', tags: 'git commit', description: 'hello hello he444llo'},
 			{title: 'update git2', tags: 'bash generate random string', description: 'hello hello he444llo'},
 			{title: 'update git3', tags: 'thr', description: 'hello hello he444llo'},
@@ -68,17 +68,21 @@ class Body extends Component {
 		return result.map((card) => {
 			if(_.includes(result, card)){
 				return (
-					<div key={card.title} className='cardContainer'>
+					<div key={card.title} className='cardContainer' onClick={this.props.onCardClick(card.title, card.description, card.tags)}>
 						<div className='cardTop'>
 							<div className='cardTitle'>
 								{card.title}
 							</div>
-							<div className='cardDescription'>
-								{card.description}
+						</div>
+						<div className='cardMiddle'>
+							<div className='cardDescription limitLines'>
+								{card.description.length > 200 ? card.description.substr(0, 200) + '...' : card.description}
 							</div>
 						</div>
 						<div className='cardBottom'>
-							{card.tags}
+							<div className='cardTags'>
+								{card.tags}
+							</div>
 						</div>
 					</div>
 				);
@@ -95,20 +99,85 @@ class Body extends Component {
 	}
 }
 
+class Modal extends Component {
+
+	constructor(){
+		super();
+	}
+
+	render(){
+		return (
+			<div
+				className={this.props.visible ? 'modalContainer' : 'invisible'}
+				onClick={this.props.closeModal}
+			>
+				<div className='modal'>
+					<div className='modalTop'>
+						<div className='modalTitle'>
+							{this.props.title}
+						</div>
+					</div>
+					<div className='modalMiddle'>
+						<div className='modalDescription'>
+							{this.props.description}
+						</div>
+					</div>
+					<div className='modalBottom'>
+						<div className='modalTags'>
+							{this.props.tags}
+						</div>
+					</div>
+				</div>
+			</div>
+		);
+	}
+}
+
 class App extends Component {
 
 	constructor(){
 		super();
 		this.state = {
-			text: ''
+			text: '',
+			modalTitle: '',
+			modalDescription: '',
+			modalTags: '',
+			modalVisible: false
 		};
+	}
+
+	setModal(title, description, tags){
+		this.setState({
+			modalVisible: true,
+			modalTitle: title,
+			modalDescription: description,
+			modalTags: tags
+		});
+	}
+
+	closeModal(){
+		this.setState({
+			modalVisible: false,
+			modalTitle: '',
+			modalDescription: '',
+			modalTags: ''
+		});
 	}
 
 	render(){
 		return (
 			<div>
 				<Header text={this.state.text} updateText={(text) => this.setState({text})}/>
-				<Body text={this.state.text}/>
+				<Body
+					text={this.state.text}
+					onCardClick={(title, description, tags) => this.setModal.bind(this, title, description, tags)}/>
+				<Modal
+					title={this.state.modalTitle}
+					description={this.state.modalDescription}
+					tags={this.state.modalTags}
+					visible={this.state.modalVisible}
+					closeModal={this.closeModal.bind(this)}
+				/>
 			</div>
 		);
 	}
