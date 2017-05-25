@@ -108,24 +108,22 @@ class Modal extends Component {
 	render(){
 		return (
 			<div
-				className={this.props.visible ? 'modalContainer' : 'invisible'}
+				className={this.props.visible ? 'modal show' : 'modal'}
 				onClick={this.props.closeModal}
 			>
-				<div className='modal'>
-					<div className='modalTop'>
-						<div className='modalTitle'>
-							{this.props.title}
-						</div>
+				<div className='modalTop'>
+					<div className='modalTitle'>
+						{this.props.title}
 					</div>
-					<div className='modalMiddle'>
-						<div className='modalDescription'>
-							{this.props.description}
-						</div>
+				</div>
+				<div className='modalMiddle'>
+					<div className='modalDescription'>
+						{this.props.description}
 					</div>
-					<div className='modalBottom'>
-						<div className='modalTags'>
-							{this.props.tags}
-						</div>
+				</div>
+				<div className='modalBottom'>
+					<div className='modalTags'>
+						{this.props.tags}
 					</div>
 				</div>
 			</div>
