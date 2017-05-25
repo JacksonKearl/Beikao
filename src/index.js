@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
 import Fuse from 'fuse.js';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 class Header extends Component {
 
@@ -61,10 +62,8 @@ class Body extends Component {
 	}
 
 	getCards(){
-
 		let fuse = new Fuse(this.data, this.options);
 		let result = this.props.text == '' ? this.data : fuse.search(this.props.text);
-		console.log(result)
 		return result.map((card) => {
 			if(_.includes(result, card)){
 				return (
@@ -162,13 +161,9 @@ class App extends Component {
 		});
 	}
 
-	render(){
-		return (
-			<div>
-				<Header text={this.state.text} updateText={(text) => this.setState({text})}/>
-				<Body
-					text={this.state.text}
-					onCardClick={(title, description, tags) => this.setModal.bind(this, title, description, tags)}/>
+	renderModal(){
+		if(this.state.modalVisible){
+			return (
 				<Modal
 					title={this.state.modalTitle}
 					description={this.state.modalDescription}
@@ -176,6 +171,25 @@ class App extends Component {
 					visible={this.state.modalVisible}
 					closeModal={this.closeModal.bind(this)}
 				/>
+			);
+		}
+	}
+
+	render(){
+		return (
+			<div>
+				<Header text={this.state.text} updateText={(text) => this.setState({text})}/>
+				<Body
+					text={this.state.text}
+					onCardClick={(title, description, tags) => this.setModal.bind(this, title, description, tags)}
+				/>
+				<CSSTransitionGroup
+					transitionName="example"
+					transitionEnterTimeout={500}
+					transitionLeaveTimeout={300}
+				>
+					{this.renderModal()}
+				</CSSTransitionGroup>
 			</div>
 		);
 	}
