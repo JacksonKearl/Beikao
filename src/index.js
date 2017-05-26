@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
 import Fuse from 'fuse.js';
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
+import Transition from 'react-transition-group/CSSTransitionGroup';
 
 class Header extends Component {
 
@@ -18,12 +18,16 @@ class Header extends Component {
 		return (
 			<div className='headerContainer'>
 				<input
+					type='text'
 					className='headerInput'
 					placeholder='search for something'
 					value={this.props.text}
 					autoFocus={true}
 					onChange={(event) => this.props.updateText(event.target.value)}
 				/>
+				<div onClick={this.props.onPlusClick} className='plus'>
+					+
+				</div>
 			</div>
 		);
 	}
@@ -91,9 +95,14 @@ class Body extends Component {
 
 	render(){
 		return (
-			<div className='bodyContainer'>
+			<Transition
+				transitionName='fade'
+				transitionEnterTimeout={500}
+				transitionLeaveTimeout={300}
+				className='bodyContainer'
+			>
 				{this.getCards()}
-			</div>
+			</Transition>
 		);
 	}
 }
@@ -108,22 +117,22 @@ class Modal extends Component {
 		return (
 			<div
 				className={this.props.visible ? 'modal show' : 'modal'}
-				onClick={this.props.closeModal}
+				//onClick={this.props.closeModal}
 			>
 				<div className='modalTop'>
-					<div className='modalTitle'>
+					<textarea className='modalTitle'>
 						{this.props.title}
-					</div>
+					</textarea>
 				</div>
 				<div className='modalMiddle'>
-					<div className='modalDescription'>
+					<textarea className='modalDescription'>
 						{this.props.description}
-					</div>
+					</textarea>
 				</div>
 				<div className='modalBottom'>
-					<div className='modalTags'>
+					<textarea className='modalTags'>
 						{this.props.tags}
-					</div>
+					</textarea>
 				</div>
 			</div>
 		);
@@ -162,34 +171,35 @@ class App extends Component {
 	}
 
 	renderModal(){
-		if(this.state.modalVisible){
-			return (
-				<Modal
-					title={this.state.modalTitle}
-					description={this.state.modalDescription}
-					tags={this.state.modalTags}
-					visible={this.state.modalVisible}
-					closeModal={this.closeModal.bind(this)}
-				/>
-			);
-		}
+		return (
+			<Modal
+				title={this.state.modalTitle}
+				description={this.state.modalDescription}
+				tags={this.state.modalTags}
+				visible={this.state.modalVisible}
+				closeModal={this.closeModal.bind(this)}
+			/>
+		);
 	}
 
 	render(){
 		return (
 			<div>
-				<Header text={this.state.text} updateText={(text) => this.setState({text})}/>
+				<Header
+					text={this.state.text}
+					updateText={(text) => this.setState({text})}
+				/>
 				<Body
 					text={this.state.text}
 					onCardClick={(title, description, tags) => this.setModal.bind(this, title, description, tags)}
 				/>
-				<CSSTransitionGroup
-					transitionName="example"
+				<Transition
+					transitionName='bounce'
 					transitionEnterTimeout={500}
 					transitionLeaveTimeout={300}
 				>
-					{this.renderModal()}
-				</CSSTransitionGroup>
+					{this.state.modalVisible && this.renderModal()}
+				</Transition>
 			</div>
 		);
 	}
