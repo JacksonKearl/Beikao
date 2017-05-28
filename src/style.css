@@ -93,6 +93,9 @@ body {
 	box-shadow: 2px 2px 10px rgba(0, 0, 0, .5);
 	height: 70%;
 	width: 70%;
+	display: flex;
+	flex-direction: column;
+	background-color: #aaa;
 }
 
 .modal textarea {
@@ -104,17 +107,48 @@ body {
 	background-color: #fafafa;
 }
 
-.modalTop {
-	border-bottom: 1px solid rgba(0,0,0,.1);
-}
-
-.modalMiddle {
-	border-bottom: 1px solid rgba(0,0,0,.1);
-}
-
 .modalTitle {
 	font-weight: bold;
 	font-size: 20px;
+}
+
+.modalBorder {
+	border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.modalRow {
+	padding: 10px;
+}
+
+.modalExit {
+	height: 20px;
+	background-color: #fff;
+	color: #ccc;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: 500ms;
+}
+
+.modalExit:hover {
+	color: #eee;
+}
+
+.modalTop {
+	flex-grow: 1;
+	flex-basis: 0;
+}
+
+.modalMiddle {
+	flex-grow: 9;
+	flex-basis: 0;
+}
+
+.modalBottom {
+	flex-grow: 2;
+	flex-basis: 0;
 }
 
 .modalDescription {

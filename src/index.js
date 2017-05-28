@@ -37,18 +37,6 @@ class Body extends Component {
 
 	constructor(){
 		super();
-		this.data = [
-			{title: 'update git', tags: 'git amend', description: 'hello hello he444llogit rebase -i HEAD~3 # Displays a list of the last 3 commits on the current branchgit rebase -i HEAD~3 # Displays a list of the last 3 commits on the current branchgit rebase -i HEAD~3 # Displays a list of the last 3 commits on the current branchgit rebase -i HEAD~3 # Displays a list of the last 3 commits on the current branchgit rebase -i HEAD~3 # Displays a list of the last 3 commits on the current branchgit rebase -i HEAD~3 # Displays a list of the last 3 commits on the current branch'},
-			{title: 'update git1', tags: 'git commit', description: 'hello hello he444llo'},
-			{title: 'update git2', tags: 'bash generate random string', description: 'hello hello he444llo'},
-			{title: 'update git3', tags: 'thr', description: 'hello hello he444llo'},
-			{title: 'update git4', tags: 'this', description: 'hello hello he444llo'},
-			{title: 'update git5', tags: 'is', description: 'hello hello he444llo'},
-			{title: 'update git6', tags: 'where', description: 'hello hello he444llo'},
-			{title: 'update git7', tags: 'we', description: 'hello hello he444llo'},
-			{title: 'update git8', tags: 'need', description: 'hello hello he444llo'},
-			{title: 'update git9', tags: 'diff', description: 'hello hello he444llo'},
-		];
 		this.options = {
 			keys: [{
 					name: 'tags',
@@ -66,8 +54,8 @@ class Body extends Component {
 	}
 
 	getCards(){
-		let fuse = new Fuse(this.data, this.options);
-		let result = this.props.text == '' ? this.data : fuse.search(this.props.text);
+		let fuse = new Fuse(this.props.data, this.options);
+		let result = this.props.text == '' ? this.props.data : fuse.search(this.props.text);
 		return result.map((card) => {
 			if(_.includes(result, card)){
 				return (
@@ -113,26 +101,31 @@ class Modal extends Component {
 		super();
 	}
 
+	exit(){
+		const title = this.refs.title.value;
+		const description = this.refs.desc.value;
+		const tags = this.refs.tags.value;
+		const oldTitle = this.props.title;
+		this.props.updateCard(oldTitle, {title, description, tags});
+		this.props.closeModal();
+	}
+
 	render(){
 		return (
 			<div
 				className={this.props.visible ? 'modal show' : 'modal'}
-				//onClick={this.props.closeModal}
 			>
-				<div className='modalTop'>
-					<textarea className='modalTitle'>
-						{this.props.title}
-					</textarea>
+				<div className='modalExit' onClick={this.exit.bind(this)}>
+					x
 				</div>
-				<div className='modalMiddle'>
-					<textarea className='modalDescription'>
-						{this.props.description}
-					</textarea>
+				<div className='modalTop modalBorder modalRow'>
+					<textarea className='modalTitle' defaultValue={this.props.title} ref='title'/>
 				</div>
-				<div className='modalBottom'>
-					<textarea className='modalTags'>
-						{this.props.tags}
-					</textarea>
+				<div className='modalMiddle modalBorder modalRow'>
+					<textarea className='modalDescription' defaultValue={this.props.description} ref='desc'/>
+				</div>
+				<div className='modalBottom modalRow'>
+					<textarea className='modalTags' defaultValue={this.props.tags} ref='tags'/>
 				</div>
 			</div>
 		);
@@ -148,7 +141,17 @@ class App extends Component {
 			modalTitle: '',
 			modalDescription: '',
 			modalTags: '',
-			modalVisible: false
+			modalVisible: false,
+			data: [
+				{title: 'update git', description: 'gello', tags: 'boom boom'},
+				{title: 'update git1', description: 'gello', tags: 'boom boom'},
+				{title: 'update git2', description: 'gello', tags: 'boom boom'},
+				{title: 'update git3', description: 'gello', tags: 'boom boom'},
+				{title: 'update git4', description: 'gello', tags: 'boom boom'},
+				{title: 'update git5', description: 'gello', tags: 'boom boom'},
+				{title: 'update git6', description: 'gello', tags: 'boom boom'},
+				{title: 'update git7', description: 'gello', tags: 'boom boom'},
+			],
 		};
 	}
 
@@ -170,6 +173,15 @@ class App extends Component {
 		});
 	}
 
+	updateCard(oldTitle, newData){
+		let data = this.state.data;
+		const index = _.findIndex(data, (o) => o.title == oldTitle);
+		data[index] = newData;
+		this.setState({
+			data
+		});
+	}
+
 	renderModal(){
 		return (
 			<Modal
@@ -178,6 +190,7 @@ class App extends Component {
 				tags={this.state.modalTags}
 				visible={this.state.modalVisible}
 				closeModal={this.closeModal.bind(this)}
+				updateCard={(title, newData) => this.updateCard(title, newData)}
 			/>
 		);
 	}
@@ -192,6 +205,7 @@ class App extends Component {
 				<Body
 					text={this.state.text}
 					onCardClick={(title, description, tags) => this.setModal.bind(this, title, description, tags)}
+					data={this.state.data}
 				/>
 				<Transition
 					transitionName='bounce'
