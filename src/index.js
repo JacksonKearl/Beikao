@@ -115,9 +115,6 @@ class Modal extends Component {
 			<div
 				className={this.props.visible ? 'modal show' : 'modal'}
 			>
-				<div className='modalExit' onClick={this.exit.bind(this)}>
-					x
-				</div>
 				<div className='modalTop modalBorder modalRow'>
 					<textarea className='modalTitle' defaultValue={this.props.title} ref='title'/>
 				</div>
@@ -126,6 +123,14 @@ class Modal extends Component {
 				</div>
 				<div className='modalBottom modalRow'>
 					<textarea className='modalTags' defaultValue={this.props.tags} ref='tags'/>
+				</div>
+				<div className='modalDone'>
+					<div className='modalExit' onClick={this.exit.bind(this)}>
+						SAVE
+					</div>
+					<div className='modalExit' onClick={this.props.closeModal}>
+						CANCEL
+					</div>
 				</div>
 			</div>
 		);
@@ -142,17 +147,15 @@ class App extends Component {
 			modalDescription: '',
 			modalTags: '',
 			modalVisible: false,
-			data: [
-				{title: 'update git', description: 'gello', tags: 'boom boom'},
-				{title: 'update git1', description: 'gello', tags: 'boom boom'},
-				{title: 'update git2', description: 'gello', tags: 'boom boom'},
-				{title: 'update git3', description: 'gello', tags: 'boom boom'},
-				{title: 'update git4', description: 'gello', tags: 'boom boom'},
-				{title: 'update git5', description: 'gello', tags: 'boom boom'},
-				{title: 'update git6', description: 'gello', tags: 'boom boom'},
-				{title: 'update git7', description: 'gello', tags: 'boom boom'},
-			],
+			data: [],
 		};
+	}
+
+	componentDidMount(){
+		let data = JSON.parse(localStorage.getItem('beikao_data'));
+		this.setState({
+			data
+		});
 	}
 
 	setModal(title, description, tags){
@@ -174,12 +177,21 @@ class App extends Component {
 	}
 
 	updateCard(oldTitle, newData){
+		if(newData.title == '') return;
 		let data = this.state.data;
+		const hasNewTitle = _.find(data, (o) => o.title == newData.title);
+		if(oldTitle == '' && hasNewTitle) return;
+		if(oldTitle != newData.title && hasNewTitle) return;
 		const index = _.findIndex(data, (o) => o.title == oldTitle);
-		data[index] = newData;
+		if(index > -1){
+			data[index] = newData;
+		} else {
+			data.push(newData);
+		}
 		this.setState({
 			data
 		});
+		localStorage.setItem('beikao_data', JSON.stringify(data));
 	}
 
 	renderModal(){
@@ -201,6 +213,7 @@ class App extends Component {
 				<Header
 					text={this.state.text}
 					updateText={(text) => this.setState({text})}
+					onPlusClick={this.setModal.bind(this, '', '', '')}
 				/>
 				<Body
 					text={this.state.text}
