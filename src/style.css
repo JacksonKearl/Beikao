@@ -1,19 +1,41 @@
 body {
 	margin: 0;
-	background-image: url('pat.png');
+	background-color: #e8e8e8;
+	font-family: 'Roboto', sans-serif;
 }
 
 .headerContainer {
 	width: 100%;
-	height: 125px;
+	height: 64px;
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	flex-direction: row;
+	justify-content: space-around;
 	align-items: center;
+	background-color: #ff6666;
+}
+
+.headerContainer input {
+	height: 46px;
+	width: 50%;
+}
+
+.headerContainer input[type=text] {
+    padding: 12px 20px;
+    box-sizing: border-box;
+	background: rgba(0,0,0,0.04);
+	transition: 250ms;
+	outline: none;
+	border-radius: 4px;
+	border: 1px solid rgba(0,0,0,0);
+}
+
+.headerContainer input[type=text]:focus {
+	background: rgba(255,255,255,1);
+	outline: none;
 }
 
 .plus {
-	color: #aaa;
+	color: #ddd;
 	font-size: 30px;
 	cursor: pointer;
 	transition: 300ms;
@@ -23,29 +45,11 @@ body {
 	color: #fff;
 }
 
-.headerContainer input {
-	width: 50%;
-	min-width: 100px;
-}
-
-.headerContainer input[type=text] {
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-	border: 3px solid #aaa;
-	background-color: #eee;
-	transition: 250ms;
-}
-
-.headerContainer input[type=text]:focus {
-	background-color: #f8f8f8;
-	border: 3px solid #999;
-	outline: none;
-}
-
 .bodyContainer {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: flex-start;
+	flex-direction: row;
 }
 
 .cardContainer {
@@ -53,6 +57,7 @@ body {
 	background-color: #fafafa;
 	box-shadow: 1px 1px 4px rgba(0, 0, 0, .15);
 	max-width: 300px;
+	max-height: 300px;
 	cursor: pointer;
 }
 
@@ -95,7 +100,7 @@ body {
 	width: 70%;
 	display: flex;
 	flex-direction: column;
-	background-color: #aaa;
+	background-color: #fafafa;
 }
 
 .modal textarea {
@@ -112,12 +117,9 @@ body {
 	font-size: 20px;
 }
 
-.modalBorder {
-	border-bottom: 1px solid rgba(0,0,0,.1);
-}
-
 .modalRow {
 	padding: 10px;
+	border-bottom: 1px solid rgba(0,0,0,.1);
 }
 
 .modalDone {
@@ -130,20 +132,57 @@ body {
 .modalExit {
 	height: 50px;
 	font-size: 20px;
-	font-weight: bold;
-	background-color: #fff;
-	color: #ccc;
+	background-color: #fafafa;
 	cursor: pointer;
-	transition: 500ms;
+	transition: 250ms;
 	flex: 1;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+
+    background: 0 0;
+    border: none;
+    border-radius: 2px;
+    position: relative;
+    height: 36px;
+    margin: 0;
+    min-width: 64px;
+    padding: 0 16px;
+    display: inline-block;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    overflow: hidden;
+    will-change: box-shadow;
+    transition:
+		box-shadow .2s cubic-bezier(.4,0,1,1),
+		background-color .2s cubic-bezier(.4,0,.2,1),
+		color .2s cubic-bezier(.4,0,.2,1);
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    line-height: 36px;
+    vertical-align: middle;
 }
 
 .modalExit:hover {
-	color: #eee;
+	background-color: rgba(158,158,158,.2);
+}
+
+.modalExit:active {
+	background-color: rgba(158,158,158,.4);
+}
+
+.save {
+	color: #3f51b5;
+}
+
+.cancel {
+	color: #ff4081;
 }
 
 .modalTop {

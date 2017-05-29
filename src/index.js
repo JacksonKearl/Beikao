@@ -83,14 +83,9 @@ class Body extends Component {
 
 	render(){
 		return (
-			<Transition
-				transitionName='fade'
-				transitionEnterTimeout={500}
-				transitionLeaveTimeout={300}
-				className='bodyContainer'
-			>
+			<div className='bodyContainer'>
 				{this.getCards()}
-			</Transition>
+			</div>
 		);
 	}
 }
@@ -115,20 +110,20 @@ class Modal extends Component {
 			<div
 				className={this.props.visible ? 'modal show' : 'modal'}
 			>
-				<div className='modalTop modalBorder modalRow'>
+				<div className='modalTop modalRow'>
 					<textarea className='modalTitle' defaultValue={this.props.title} ref='title'/>
 				</div>
-				<div className='modalMiddle modalBorder modalRow'>
+				<div className='modalMiddle modalRow'>
 					<textarea className='modalDescription' defaultValue={this.props.description} ref='desc'/>
 				</div>
 				<div className='modalBottom modalRow'>
 					<textarea className='modalTags' defaultValue={this.props.tags} ref='tags'/>
 				</div>
 				<div className='modalDone'>
-					<div className='modalExit' onClick={this.exit.bind(this)}>
+					<div className='modalExit save' onClick={this.exit.bind(this)}>
 						SAVE
 					</div>
-					<div className='modalExit' onClick={this.props.closeModal}>
+					<div className='modalExit cancel' onClick={this.props.closeModal}>
 						CANCEL
 					</div>
 				</div>
