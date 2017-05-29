@@ -161,9 +161,11 @@ class App extends Component {
 
 	componentDidMount(){
 		let data = JSON.parse(localStorage.getItem('beikao_data'));
-		this.setState({
-			data
-		});
+		if(data != null){
+			this.setState({ data });
+		} else {
+			this.setState({ data: [] });
+		}
 	}
 
 	setModal(title, description, tags){
