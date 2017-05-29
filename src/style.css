@@ -34,15 +34,18 @@ body {
 	outline: none;
 }
 
-.plus {
-	color: #ddd;
-	font-size: 30px;
-	cursor: pointer;
-	transition: 300ms;
+.headerContainer input::-webkit-input-placeholder {
+  color: #fff;
 }
 
-.plus:hover {
+.headerContainer input:focus::-webkit-input-placeholder {
+  color: #000;
+}
+
+.plus {
 	color: #fff;
+	font-size: 30px;
+	cursor: pointer;
 }
 
 .bodyContainer {
@@ -130,51 +133,29 @@ body {
 }
 
 .modalExit {
-	height: 50px;
 	font-size: 20px;
 	background-color: #fafafa;
-	cursor: pointer;
-	transition: 250ms;
+	height: 50px;
 	flex: 1;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 
-    background: 0 0;
-    border: none;
     border-radius: 2px;
-    position: relative;
-    height: 36px;
-    margin: 0;
-    min-width: 64px;
     padding: 0 16px;
-    display: inline-block;
-    font-family: "Roboto","Helvetica","Arial",sans-serif;
     font-size: 14px;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0;
-    overflow: hidden;
-    will-change: box-shadow;
     transition:
 		box-shadow .2s cubic-bezier(.4,0,1,1),
 		background-color .2s cubic-bezier(.4,0,.2,1),
 		color .2s cubic-bezier(.4,0,.2,1);
-    outline: none;
     cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-    line-height: 36px;
-    vertical-align: middle;
 }
 
 .modalExit:hover {
 	background-color: rgba(158,158,158,.2);
-}
-
-.modalExit:active {
-	background-color: rgba(158,158,158,.4);
 }
 
 .save {
@@ -230,28 +211,5 @@ body {
 .bounce-leave.bounce-leave-active {
   opacity: 0.01;
   transition: opacity 200ms ease-in-out, transform 250ms cubic-bezier(.54,-0.38,.39,1);
-  transform: translateY(-10%);
-}
-
-.fade-enter {
-  opacity: 0.01;
-  transform: translateY(-10%);
-}
-
-.fade-enter.fade-enter-active {
-  transform: translateY(0%);
-  opacity: 1;
-  transition: opacity 100ms ease-in-out, transform 150ms cubic-bezier(.72,0,.24,1.51);
-
-}
-
-.fade-leave {
-  opacity: 1;
-  transform: translateY(0%);
-}
-
-.fade-leave.fade-leave-active {
-  opacity: 0.01;
-  transition: opacity 100ms ease-in-out, transform 150ms cubic-bezier(.54,-0.38,.39,1);
   transform: translateY(-10%);
 }
