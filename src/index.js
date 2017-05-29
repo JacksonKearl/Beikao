@@ -111,7 +111,7 @@ class Modal extends Component {
 				className={this.props.visible ? 'modal show' : 'modal'}
 			>
 				<div className='modalTop modalRow'>
-					<textarea className='modalTitle' defaultValue={this.props.title} ref='title'/>
+					<textarea className='modalTitle' defaultValue={this.props.title} ref='title' autoFocus={true}/>
 				</div>
 				<div className='modalMiddle modalRow'>
 					<textarea className='modalDescription' defaultValue={this.props.description} ref='desc'/>
