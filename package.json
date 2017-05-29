@@ -29,6 +29,7 @@
   "dependencies": {
     "fuse.js": "^3.0.3",
     "lodash": "^4.17.4",
+    "marked": "^0.3.6",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-transition-group": "^1.1.3"

@@ -2,6 +2,7 @@ body {
 	margin: 0;
 	background-color: #e8e8e8;
 	font-family: 'Roboto', sans-serif;
+	word-break: break-word;
 }
 
 .headerContainer {
@@ -15,7 +16,6 @@ body {
 }
 
 .headerInput {
-    /* padding: 12px 20px; */
 	flex: 1;
 	outline: none;
 	border: none;
@@ -80,7 +80,6 @@ body {
 	box-shadow: 1px 1px 4px rgba(0, 0, 0, .15);
 	width: 100%;
 	cursor: pointer;
-	word-wrap: break-word;
 	transition: 350ms;
 }
 
@@ -96,6 +95,7 @@ body {
 .cardMiddle {
 	border-bottom: 1px solid rgba(0,0,0,.1);
 	padding: 8px;
+	overflow: scroll;
 }
 
 .cardBottom {
@@ -111,23 +111,41 @@ body {
 	font-size: 12px;
 }
 
-.cardTags {
-	font-size: 15px;
+.modalContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;background: rgba(0,0,0,0);
+	z-index: 1000;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;background: rgba(0,0,0,0.5);
 }
 
 .modal {
-	position: absolute;
-	top: 0;
-	right: 0;
-	left: 0;
-	bottom: 0;
-	margin: auto;
 	box-shadow: 2px 2px 10px rgba(0, 0, 0, .5);
-	height: 70%;
-	width: 70%;
+	background-color: #fafafa;
 	display: flex;
 	flex-direction: column;
-	background-color: #fafafa;
+	max-width: 80%;
+	max-height: 80%;
+	z-index: 500;
+}
+
+.modalEditing {
+	height: 80%;
+	width: 80%;
 }
 
 .modal textarea {
@@ -154,13 +172,12 @@ body {
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	height: 80px;
 }
 
 .modalExit {
 	font-size: 20px;
 	background-color: #fafafa;
-	height: 100%;
+	height: 40px;
 	flex: 1;
 	display: flex;
 	flex-direction: column;
@@ -192,18 +209,44 @@ body {
 }
 
 .modalTop {
-	flex-grow: 1;
-	flex-basis: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .modalMiddle {
-	flex-grow: 9;
-	flex-basis: 0;
+	overflow: scroll;
+	flex: 1;
 }
 
 .modalBottom {
-	flex-grow: 2;
-	flex-basis: 0;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.tag_modal {
+    background-color: #d8d8d8;
+    display: inline;
+    padding: 3px 6px;
+    margin: 4px 5px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+}
+
+.cardTags {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.tag_card {
+    background-color: #d8d8d8;
+    display: inline;
+    padding: 3px 6px;
+    margin: 5px 5px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+	font-size: 10px;
 }
 
 .modalDescription {
