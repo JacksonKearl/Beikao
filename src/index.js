@@ -25,9 +25,7 @@ class Header extends Component {
 					autoFocus={true}
 					onChange={(event) => this.props.updateText(event.target.value)}
 				/>
-				<div onClick={this.props.onPlusClick} className='plus'>
-					+
-				</div>
+				<img src='add.svg' onClick={this.props.onPlusClick} className='plus'/>
 			</div>
 		);
 	}
