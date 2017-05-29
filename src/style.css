@@ -14,24 +14,44 @@ body {
 	background-color: #ff6666;
 }
 
-.headerContainer input {
+.headerInput {
+    /* padding: 12px 20px; */
+	flex: 1;
+	outline: none;
+	border: none;
+	height: 100%;
+	background: transparent;
+	color: #fff;
+}
+
+.headerInputFocus {
+	color: #000;
+}
+
+.headerContainer form img {
+	vertical-align: middle;
+	text-align: center;
+	height: 25px;
+	width: 50px;
+	background: transparent;
+}
+
+.headerForm {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
 	height: 46px;
 	width: 50%;
-}
-
-.headerContainer input[type=text] {
-    padding: 12px 20px;
     box-sizing: border-box;
 	background: rgba(0,0,0,0.04);
-	transition: 250ms;
-	outline: none;
 	border-radius: 4px;
 	border: 1px solid rgba(0,0,0,0);
+	transition: 300ms;
 }
 
-.headerContainer input[type=text]:focus {
+.headerFormFocus {
 	background: rgba(255,255,255,1);
-	outline: none;
 }
 
 .headerContainer input::-webkit-input-placeholder {
@@ -61,6 +81,11 @@ body {
 	width: 100%;
 	cursor: pointer;
 	word-wrap: break-word;
+	transition: 350ms;
+}
+
+.cardContainer:hover {
+	box-shadow: 1px 1px 20px rgba(0, 0, 0, .3);
 }
 
 .cardTop {

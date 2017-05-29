@@ -8,23 +8,38 @@ class Header extends Component {
 
 	constructor(){
 		super();
+		this.state = {
+			focused: false
+		};
 	}
 
 	componentDidMount(){
-		console.log('Component mounted');
+		this.refs.inp.focus();
+		this.setFocused(true);
+	}
+
+	setFocused(value){
+		this.setState({
+			focused: value
+		});
 	}
 
 	render(){
 		return (
 			<div className='headerContainer'>
-				<input
-					type='text'
-					className='headerInput'
-					placeholder='search for something'
-					value={this.props.text}
-					autoFocus={true}
-					onChange={(event) => this.props.updateText(event.target.value)}
-				/>
+				<form className={this.state.focused ? 'headerForm headerFormFocus' : 'headerForm'}>
+					<img src='search.svg' className='headerForm'/>
+					<input
+						ref='inp'
+						type='text'
+						className={this.state.focused ? 'headerInput headerInputFocus' : 'headerInput' }
+						placeholder='search for something'
+						value={this.props.text}
+						onFocus={this.setFocused.bind(this, true)}
+						onBlur={this.setFocused.bind(this, false)}
+						onChange={(event) => this.props.updateText(event.target.value)}
+					/>
+				</form>
 				<img src='add.svg' onClick={this.props.onPlusClick} className='plus'/>
 			</div>
 		);
