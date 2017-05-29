@@ -251,7 +251,6 @@ class App extends Component {
 	}
 
 	componentDidMount(){
-		delete localStorage.beikao_data;
 		let data = JSON.parse(localStorage.getItem('beikao_data'));
 		if(data != null){
 			this.setState({ data });
