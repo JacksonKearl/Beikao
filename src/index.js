@@ -55,16 +55,18 @@ class Body extends Component {
 		this.options = {
 			keys: [{
 					name: 'tags',
-					weight: 0.65
+					weight: 0.5
 				},{
 					name: 'title',
-					weight: 0.2
+					weight: 0.3
 				},{
 					name: 'description',
-					weight: 0.15
+					weight: 0.2
 				}],
 			shouldSort: true,
-			minMatchCharLength: 0,
+			tokenize: true,
+			threshold: 0.3,
+			minMatchCharLength: 1,
 		};
 	}
 
