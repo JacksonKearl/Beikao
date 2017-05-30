@@ -88,7 +88,7 @@ class Body extends Component {
 						</div>
 						<div className='cardBottom'>
 							<div className='cardTags'>
-								{card.tags.split(/\s+/).map((tag) => {
+								{card.tags.trim().split(/\s+/).map((tag) => {
 									return (
 										<div className='tag_card'>
 											{tag}
@@ -191,7 +191,7 @@ class Modal extends Component {
 		} else {
 			return (
 				<div className='modalBottom modalRow'>
-					{this.props.tags.split(/\s+/).map((tag) => {
+					{this.props.tags.trim().split(/\s+/).map((tag) => {
 						return (
 							<div className='tag_modal'>
 								{tag}

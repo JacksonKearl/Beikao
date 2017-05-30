@@ -36,6 +36,10 @@ body {
 	background: transparent;
 }
 
+.headerContainer form {
+	min-width: 200px;
+}
+
 .headerForm {
 	display: flex;
 	flex-direction: row;
@@ -70,6 +74,8 @@ body {
 
 .bodyContainer {
 	columns: 5 200px;
+	-webkit-columns: 5 200px;
+	-moz-columns: 5 200px;
 	margin: 0 10px;
 }
 
@@ -168,6 +174,7 @@ body {
 }
 
 .modalDone {
+	min-height: 40px;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -209,27 +216,32 @@ body {
 }
 
 .modalTop {
+	min-height: 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+	overflow: scroll;
 }
 
 .modalMiddle {
 	overflow: scroll;
 	flex: 1;
+	min-height: 200px;
 }
 
 .modalBottom {
 	display: flex;
 	flex-wrap: wrap;
+	overflow: scroll;
+	height: 40px;
 }
 
 .tag_modal {
     background-color: #d8d8d8;
     display: inline;
     padding: 3px 6px;
-    margin: 4px 5px;
+    margin: 10px 5px;
     border-radius: 5px;
     box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
 }
