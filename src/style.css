@@ -240,7 +240,7 @@ body {
 .tag_modal {
     background-color: #d8d8d8;
     display: inline;
-    padding: 3px 6px;
+    padding: 1px 6px;
     margin: 10px 5px;
     border-radius: 5px;
     box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
