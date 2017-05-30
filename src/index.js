@@ -28,6 +28,7 @@ class Header extends Component {
 	render(){
 		return (
 			<div className='headerContainer'>
+				<img src='icons/delete_white.svg' onClick={this.props.deleteAll} className='plus'/>
 				<form className={this.state.focused ? 'headerForm headerFormFocus' : 'headerForm'}>
 					<img src='icons/search.svg' className='headerForm'/>
 					<input
@@ -280,6 +281,13 @@ class App extends Component {
 		});
 	}
 
+	deleteAll(){
+		this.setState({
+			data: []
+		});
+		localStorage.setItem('beikao_data', JSON.stringify([]));
+	}
+
 	deleteCard(title){
 		let data = this.state.data;
 		_.remove(data, (obj) => {
@@ -288,6 +296,7 @@ class App extends Component {
 		this.setState({
 			data
 		});
+		localStorage.setItem('beikao_data', JSON.stringify(data));
 		this.closeModal();
 	}
 
@@ -331,6 +340,7 @@ class App extends Component {
 					text={this.state.text}
 					updateText={(text) => this.setState({text})}
 					onPlusClick={this.setModal.bind(this, '', '', '', true)}
+					deleteAll={this.deleteAll.bind(this)}
 				/>
 				<Body
 					text={this.state.text}
