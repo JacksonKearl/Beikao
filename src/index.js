@@ -71,7 +71,7 @@ class Body extends Component {
 	getCards(){
 		let fuse = new Fuse(this.props.data, this.options);
 		let result = this.props.text == '' ? this.props.data : fuse.search(this.props.text);
-		return result.map((card) => {
+		return result.slice(0, 20).map((card) => {
 			if(_.includes(result, card)){
 				return (
 					<div key={card.title} className='cardContainer' onClick={this.props.onCardClick(card.title, card.description, card.tags)}>
